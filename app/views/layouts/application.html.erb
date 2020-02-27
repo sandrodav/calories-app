@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CaloriesApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header class="navbar  navbar-inverse">
+    <div class="navbar-class">
+      <div class="container">
+
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+        <% if user_signed_in?%>
+        <ul class="nav navbar-nav">
+          <li><%= link_to 'Table',tables_path %></li>
+          <li><%= link_to 'All Meals',meals_path %></li>
+          <li><%= link_to 'Users', user_index_path %></li>
+          <li><%=link_to 'Logout', destroy_user_session_path , method: :delete %></li>
+        </ul>
+        <% end %>
+
+
+      </div>
+    </div>
+  </header>
+    <%= yield %>
+  </body>
+</html>

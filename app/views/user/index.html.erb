@@ -1,0 +1,28 @@
+<h1>All user </h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>User name </th>
+      <th>User norm </th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+        <tr>
+          <td> <%= user.name %> </td>
+          <td> <%= user.norm %> </td>
+          <% if user == current_user || current_user.admin? || current_user.manager? %>
+            <td><%= link_to 'Edit Profile', edit_user_registration_path %></td>
+          <% end %>
+          <% if current_user.admin? || current_user.manager? %>
+            <td><%= link_to 'See user meals', user_path(user) %></td>
+          <% end %>
+        </tr>
+
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @table.name %>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>Dish</th>
+      <th>Calories</th>
+      <th>Date</th>
+      <% if current_user.admin? %>
+      <th>User name</th>
+      <% end %>
+
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meals.each do |meal| %>
+        <tr>
+          <td><%= meal.name %></td>
+          <td><%= meal.calories %></td>
+          <td><%= meal.date %></td>
+          <% if current_user.admin? %>
+            <td><%= meal.user.name %></td>
+          <% end %>
+          <td><%= link_to 'Show', meal %></td>
+          <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
+          <td><%= link_to 'Destroy', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to 'Add meal',new_meal_path %></p>
+
+<div class="notice">
+  <p class="notice">Total Caloreis : <%= @calories%>/<%= current_user.norm %></p>
+</div>
+
+<%= link_to 'Edit', edit_table_path(@table) %> |
+<%= link_to 'Back', tables_path %>

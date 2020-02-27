@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<form class="form-inline my-2 my-lg-0" action="/search">
+  <div class="field">
+    <input class="form-control mr-sm-2" name="d1" type="date" placeholder="Search" aria-label="Search">
+    <input class="form-control mr-sm-2" name="t1" type="time" placeholder="Search" aria-label="Search">
+  </div>
+  <div class="field">
+    <input class="form-control mr-sm-2" name="d2" type="date" placeholder="Search" aria-label="Search">
+    <input class="form-control mr-sm-2" name="t2" type="time" placeholder="Search" aria-label="Search">
+  </div>
+  <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+<h1>Meals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Dish</th>
+      <th>Calories</th>
+      <th>Date</th>
+      <% if current_user.admin? %>
+        <th>User name</th>
+      <% end %>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meals.each do |meal| %>
+    <% if meal.user == current_user || current_user.admin? %>
+        <tr>
+          <td><%= meal.name %></td>
+          <td><%= meal.calories %></td>
+          <td><%= meal.date %></td>
+          <% if current_user.admin? %>
+            <td><%= meal.user.name %></td>
+          <% end %>
+          <td><%= link_to 'Show', meal %></td>
+          <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
+          <td><%= link_to 'Destroy', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Meal', new_meal_path %>

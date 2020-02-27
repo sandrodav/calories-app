@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dish:</strong>
+  <%= @meal.name %>
+</p>
+
+<% if current_user.admin? %>
+  <p>
+    <strong>User name:</strong>
+    <%= @meal.user.name %>
+  </p>
+
+<% end %>
+
+<p>
+  <strong>Calories:</strong>
+  <%= @meal.calories %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @meal.date %>
+</p>
+
+<p>
+  <strong>User:</strong>
+</p>
+
+
+<%= link_to 'Edit', edit_meal_path(@meal) %> |
+<%= link_to 'Back', tables_path %>
