@@ -6,6 +6,7 @@
     <tr>
       <th>User name </th>
       <th>User norm </th>
+      <th>User rank</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,14 +16,29 @@
         <tr>
           <td> <%= user.name %> </td>
           <td> <%= user.norm %> </td>
+          <td> <%= user.rank %> </td>
           <% if user == current_user || current_user.admin? || current_user.manager? %>
             <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
           <% end %>
-          <% if current_user.admin? || current_user.manager? %>
+          <% if current_user.admin? || user == current_user %>
             <td><%= link_to 'See user meals', user_path(user) %></td>
           <% end %>
+          <% if current_user.manager? && !user.admin? %>
+            <td><%= link_to "Remove user", user_path(user), method: :delete,
+            data: {confirm:"Are you sure you want to delete this user"} %></td>
+          <% end %>
+          <% if current_user.admin?  %>
+
+            <td><%= link_to "Remove user", user_path(user), method: :delete,
+            data: {confirm:"Are you sure you want to delete this user"} %></td>
+          <% end %>
+
         </tr>
 
     <% end %>
   </tbody>
 </table>
+
+<h3><% if current_user.admin? || current_user.manager? %>
+  <td><%= link_to 'Add user', new_user_path %></td>
+<% end %></h3>
