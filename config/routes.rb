@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
-  resources :users do
-    member do
-      get :admin
-      get :manager
-      get :usual
-    end
-  end
+
   resources :tables
   resources :meals
   devise_for :users, :path_prefix => 'my'
