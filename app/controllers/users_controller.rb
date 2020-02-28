@@ -47,6 +47,24 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def admin
+    @user =User.find(params[:id])
+    @user.admin!
+    redirect_to users_path , notice: "#{@user} now is admin"
+  end
+
+  def manager
+    @user =User.find(params[:id])
+    @user.manager!
+    redirect_to users_path , notice: "#{@user} now is manager user"
+  end
+
+  def usual
+    @user =User.find(params[:id])
+    @user.usual!
+    redirect_to users_path , notice: "#{@user} now is usual user"
+  end
+
 
   private
 
