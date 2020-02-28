@@ -1,4 +1,4 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   def index
     @users = User.all
   end
@@ -7,4 +7,9 @@ class UserController < ApplicationController
     @user =  User.find(params[:id])
     @meals = @user.meals
   end
+
+  def edit
+    @user =  User.find(params[:id])
+  end
+  
 end

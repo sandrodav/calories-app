@@ -16,7 +16,7 @@
           <td> <%= user.name %> </td>
           <td> <%= user.norm %> </td>
           <% if user == current_user || current_user.admin? || current_user.manager? %>
-            <td><%= link_to 'Edit Profile', edit_user_registration_path %></td>
+            <td><%= link_to 'Edit Profile', edit_user_path(user) %></td>
           <% end %>
           <% if current_user.admin? || current_user.manager? %>
             <td><%= link_to 'See user meals', user_path(user) %></td>
